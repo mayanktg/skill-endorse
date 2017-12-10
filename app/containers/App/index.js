@@ -11,20 +11,35 @@ import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
 
-import HomePage from 'containers/HomePage/Loadable';
-import FeaturePage from 'containers/FeaturePage/Loadable';
+// import HomePage from 'containers/HomePage/Loadable';
+// import FeaturePage from 'containers/FeaturePage/Loadable';
+import LoginPage from 'containers/LoginPage/Loadable';
+import UserPage from 'containers/UserPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import Header from 'components/Header';
-import Footer from 'components/Footer';
+
+
+import { deepOrange500 } from 'material-ui/styles/colors';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppBar from 'material-ui/AppBar';
+
+// import Header from 'components/Header';
+// import Footer from 'components/Footer';
 
 const AppWrapper = styled.div`
-  max-width: calc(768px + 16px * 2);
+  max-width: 100%;
   margin: 0 auto;
   display: flex;
   min-height: 100%;
-  padding: 0 16px;
+  padding: 0;
   flex-direction: column;
 `;
+
+const muiTheme = getMuiTheme({
+  palette: {
+    accent1Color: deepOrange500,
+  },
+});
 
 export default function App() {
   return (
@@ -35,13 +50,20 @@ export default function App() {
       >
         <meta name="description" content="A React.js Boilerplate application" />
       </Helmet>
-      <Header />
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/features" component={FeaturePage} />
-        <Route path="" component={NotFoundPage} />
-      </Switch>
-      <Footer />
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <div>
+          <AppBar
+            title="Skill Endorser"
+            iconClassNameRight="muidocs-icon-navigation-expand-more"
+          />
+          <Switch>
+            <Route exact path="/" component={LoginPage} />
+            <Route path="/login" component={LoginPage} />
+            <Route path="/user/:user_id" component={UserPage} />
+            <Route path="" component={NotFoundPage} />
+          </Switch>
+        </div>
+      </MuiThemeProvider>
     </AppWrapper>
   );
 }
