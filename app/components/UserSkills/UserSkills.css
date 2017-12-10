@@ -1,0 +1,49 @@
+.user-skills {
+  width: calc(100% - 24px);
+  padding: 2% 0 0;
+  margin: auto;
+}
+.user-skills-form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 45px;
+  text-align: left;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.user-skills-form .skillsAutoComplete > div {
+ display: inline-flex !important;
+}
+.user-skills-form .skillsAutoComplete {
+ margin-top: 24px;
+ margin-bottom: 24px;
+}
+
+.user-skills .user-skills-form ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.user-skill-left-item, .user-skill-right-items {
+  display: inline-block;
+}
+
+.user-skill-block {
+  width: 100%;
+}
+.user-skill-block > div > div {
+  padding: 0 !important;
+}
+
+.user-skill-right-items {
+  float: right;
+}
+.user-skill-right-items > a {
+  display: inline-flex;
+  padding-left: 12px;
+}
+

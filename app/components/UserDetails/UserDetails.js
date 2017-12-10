@@ -28,9 +28,11 @@ class UserDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      photo: '',
-      skills: []
+      name: props.userData.name || '',
+      photo: props.userData.photo || '',
+      skills:props.userData.skills || [],
+      openSnackbar: false,
+      snackbarMessage: ''
     };
     this.styles = {
       chip: {
@@ -150,6 +152,7 @@ class UserDetails extends Component {
 
   render() {
     const diffSkills = this.getFilteredSkillList();
+    console.log(this.state);
     return (
       <div className="user-details">
         {

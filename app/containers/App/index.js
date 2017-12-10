@@ -8,6 +8,8 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { deleteCookie } from 'utils/constants';
+
 import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
 
@@ -16,6 +18,7 @@ import { Switch, Route } from 'react-router-dom';
 import LoginPage from 'containers/LoginPage/Loadable';
 import UserPage from 'containers/UserPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import FlatButton from 'material-ui/FlatButton';
 
 
 import { deepOrange500 } from 'material-ui/styles/colors';
@@ -54,7 +57,15 @@ export default function App() {
         <div>
           <AppBar
             title="Skill Endorser"
-            iconClassNameRight="muidocs-icon-navigation-expand-more"
+            iconElementRight={
+              <FlatButton
+                label="SIGN OUT"
+                onClick={() => {
+                  deleteCookie('se_user_id');
+                  deleteCookie('se_user_mongo_id');
+                }}
+              />
+            }
           />
           <Switch>
             <Route exact path="/" component={LoginPage} />
