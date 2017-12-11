@@ -8,7 +8,7 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { deleteCookie } from 'utils/constants';
+import cookie from 'react-cookies';
 
 import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
@@ -61,8 +61,9 @@ export default function App() {
               <FlatButton
                 label="SIGN OUT"
                 onClick={() => {
-                  deleteCookie('se_user_id');
-                  deleteCookie('se_user_mongo_id');
+                  cookie.remove('_se_user_id', { path: '/' });
+                  cookie.remove('_se_user_mongo_id', { path: '/' });
+                  location = '/';
                 }}
               />
             }

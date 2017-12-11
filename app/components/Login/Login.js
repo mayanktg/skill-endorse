@@ -5,15 +5,14 @@
  */
 import React, { Component, PropTypes } from 'react';
 import request from 'utils/request';
-import { API_BASE_URL, readCookie } from 'utils/constants';
+import { API_BASE_URL } from 'utils/constants';
 import get from 'lodash/get';
 import { withRouter } from 'react-router-dom';
-
+import cookie from 'react-cookies';
 
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import './Login.css';
-import { Cookies } from 'react-cookie';
 
 class Login extends Component {
   static propTypes = {
@@ -35,7 +34,7 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    const userId = readCookie('_se_user_id');
+    const userId = cookie.load('_se_user_id');
     if (userId) {
       this.props.history.push(`/user/${userId}`);
     }
@@ -77,8 +76,8 @@ class Login extends Component {
         this.setState({loginData: res, isLoginError: false});
         const userId = get(res, 'success.data.user_id', null);
         const mongoId = get(res, 'success.data._id', null);
-        document.cookie = '_se_user_id=' + userId + '; path=/';
-        document.cookie = '_se_user_mongo_id=' + mongoId + '; path=/';
+        cookie.save('_se_user_id', userId, { path: '/' });
+        cookie.save('_se_user_mongo_id', mongoId, { path: '/' });
         this.props.history.push(`/user/${userId}`);
       })
       .catch((err) => {
@@ -107,8 +106,8 @@ class Login extends Component {
         this.setState({registerData: res, isRegisterError: false});
         const userId = get(res, 'success.data.user_id', null);
         const mongoId = get(res, 'success.data._id', null);
-        document.cookie = '_se_user_id=' + userId + '; path=/';
-        document.cookie = '_se_user_mongo_id=' + mongoId + '; path=/';
+        cookie.save('_se_user_id', userId, { path: '/' });
+        cookie.save('_se_user_mongo_id', mongoId, { path: '/' });
         this.props.history.push(`/user/${userId}`);
       })
       .catch((err) => {

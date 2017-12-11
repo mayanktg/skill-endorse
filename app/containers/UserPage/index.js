@@ -5,8 +5,9 @@
  */
 import React, { PropTypes } from 'react';
 import { Helmet } from 'react-helmet';import request from 'utils/request';
-import { API_BASE_URL, readCookie } from 'utils/constants';
+import { API_BASE_URL } from 'utils/constants';
 import get from 'lodash/get';
+import cookie from 'react-cookies';
 
 import UserDetails from 'components/UserDetails/UserDetails';
 import UserSkills from 'components/UserSkills/UserSkills';
@@ -63,7 +64,7 @@ export default class UserPage extends React.Component {
 
   render() {
     console.log(this.state);
-    const isSameProfile = readCookie('_se_user_id') === this.state.userData.user_id;
+    const isSameProfile = cookie.load('_se_user_id') === this.state.userData.user_id;
     return (
       <div>
         <Helmet>

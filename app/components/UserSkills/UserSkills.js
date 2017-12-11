@@ -5,7 +5,8 @@
  */
 import React, { Component, PropTypes } from 'react';
 import request from 'utils/request';
-import { API_BASE_URL, readCookie } from 'utils/constants';
+import { API_BASE_URL } from 'utils/constants';
+import cookie from 'react-cookies';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import { withRouter } from 'react-router-dom';
@@ -95,7 +96,7 @@ class UserSkills extends Component {
       method: 'post',
       body: {
         user_id: this.props.userData._id,
-        endorser_user_id: readCookie('_se_user_mongo_id'),
+        endorser_user_id: cookie.load('_se_user_mongo_id'),
         skill_id: id
       }
     };
@@ -171,39 +172,42 @@ class UserSkills extends Component {
     const zeroUpvotedSkills = this.getFilteredSkillList();
     return (
       <div className="user-skills">
-        <div className="user-skills-form">
-        <List>
-          {
-            this.props.userData &&
-            <ListItem
-              disabled={true}
-              leftAvatar={ <Avatar src={user.photo} /> }
-            >
-              {user.name}
-            </ListItem>
-          }
-          {
-            !isEmpty(this.props.userSkills) &&
-            <div>
-              <h3>{`Endorse ${user.name}'s skills`}</h3>
-              <ul className="user-skill-entries">
+        {
+          user.user_id &&
+          <div className="user-skills-form">
+            <List>
               {
-                Object.keys(this.props.userSkills).map((key, index) => {
-                  return(this.getUserSkill(key));
+                this.props.userData &&
+                <ListItem
+                  disabled={true}
+                  leftAvatar={ <Avatar src={user.photo} /> }
+                >
+                  {user.name}
+                </ListItem>
+              }
+              {
+                !isEmpty(this.props.userSkills) &&
+                <div>
+                  <h3>{`Endorse ${user.name}'s skills`}</h3>
+                  <ul className="user-skill-entries">
+                  {
+                    Object.keys(this.props.userSkills).map((key, index) => {
+                      return(this.getUserSkill(key));
+                    })
+                  }
+                  </ul>
+                </div>
+              }
+            </List>
+            <div className="skillsAutoComplete">
+              {
+                zeroUpvotedSkills.map((skill, index) => {
+                  return this.renderSkillsChip(skill, index);
                 })
               }
-              </ul>
             </div>
-          }
-        </List>
-        <div className="skillsAutoComplete">
-        {
-          zeroUpvotedSkills.map((skill, index) => {
-            return this.renderSkillsChip(skill, index);
-          })
+          </div>
         }
-        </div>
-        </div>
         <Snackbar
           open={this.state.openSnackbar}
           message={this.state.snackbarMessage}
