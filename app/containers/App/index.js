@@ -63,7 +63,7 @@ export default function App() {
                 onClick={() => {
                   cookie.remove('_se_user_id', { path: '/' });
                   cookie.remove('_se_user_mongo_id', { path: '/' });
-                  window.location.replace('/');
+                  window.location.replace('/login');
                 }}
               />
             }
