@@ -60,7 +60,6 @@ class UserDetails extends Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-    console.log(name, value);
     this.setState({
       [name]: value,
     });
@@ -152,7 +151,6 @@ class UserDetails extends Component {
 
   render() {
     const diffSkills = this.getFilteredSkillList();
-    console.log(this.state);
     return (
       <div className="user-details">
         {

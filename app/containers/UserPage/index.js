@@ -25,7 +25,6 @@ export default class UserPage extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.params);
     const userId = this.props.match.params.user_id;
     const url = `${API_BASE_URL}auth/getuser/${userId}`;
     const options = {
@@ -63,7 +62,6 @@ export default class UserPage extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     const isSameProfile = cookie.load('_se_user_id') === this.state.userData.user_id;
     return (
       <div>

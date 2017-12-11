@@ -12,7 +12,6 @@ const initialState = {
 };
 
 export default function auth(state = initialState, action = {}) {
-  console.log(action);
   switch (action.type) {
     case PUT_LOGIN:
       return {
