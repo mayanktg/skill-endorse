@@ -60,7 +60,7 @@ class UserDetails extends Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-
+    console.log(name, value);
     this.setState({
       [name]: value,
     });
@@ -115,14 +115,14 @@ class UserDetails extends Component {
       <Chip
         key={data._id}
         style={this.styles.chip}
-        onClick={() => {this.handleInputChange(data)}}
+        onClick={() => {this.handleSkillsInputChange(data)}}
       >
         {data.name}
       </Chip>
     );
   }
 
-  handleInputChange = (skill) => {
+  handleSkillsInputChange = (skill) => {
     this.state.skills.push(skill);
     this.setState({
       skills: this.state.skills
