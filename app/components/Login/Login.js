@@ -29,8 +29,8 @@ class Login extends Component {
     super(props);
     this.state = {
       pageType: 'login',
-      userId: 'm',
-      password: 'm'
+      userId: '',
+      password: ''
     };
   }
 
