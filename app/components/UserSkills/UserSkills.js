@@ -155,7 +155,8 @@ class UserSkills extends Component {
 
   getFilteredSkillList = () => {
     const skills = [];
-    this.props.skillsList.map((o) => {
+    const userSkills = this.props.userData.skills || [];
+    userSkills.map((o) => {
       let isPresent = true;
       Object.keys(this.props.userSkills).map((key) => {
         if (o.name === key) {
